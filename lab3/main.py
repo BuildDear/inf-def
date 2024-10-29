@@ -2,9 +2,9 @@ import tkinter as tk  # Імпортуємо tkinter для створення �
 from tkinter import filedialog, messagebox, \
     simpledialog  # Імпортуємо компоненти для роботи з файлами, повідомленнями та діалогами
 from tkinter.scrolledtext import ScrolledText  # Імпортуємо ScrolledText для створення текстової області з прокруткою
-from aMD5 import MD5  # Імпортуємо клас MD5 з вашого файлу amain
-from RC5CBCPadLogic import RC5CBCPad  # Імпортуємо клас RC5CBCPad для шифрування та дешифрування
-from LemerGen import LemerGenerator  # Імпортуємо генератор Лемера для створення вектора ініціалізації (IV)
+from md_5 import MD5  # Імпортуємо клас MD5 з вашого файлу amain
+from information_defence.lab3.lemer_gen import LemerGenerator
+from information_defence.lab3.rc_5.rc5_cbc_pad import RC5CBCPad
 
 
 # Головний клас програми для шифрування та дешифрування
@@ -65,7 +65,7 @@ class EncryptionApp:
         self.saved_password = passcode  # Зберігаємо пароль для подальшого використання
         md5_service = MD5()  # Створюємо екземпляр класу MD5
         key = md5_service.hexdigest().encode('utf-8')[:16]  # Створюємо 16-байтовий ключ для шифрування
-        return RC5CBCPad(key, word_size=16,
+        return RC5CBCPad(key, word_size=32,
                          num_rounds=20)  # Створюємо екземпляр RC5CBCPad з параметрами w=16, r=20, b=16
 
     # Метод для шифрування файлу
